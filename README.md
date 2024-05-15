@@ -17,9 +17,28 @@ This project is a simple implementation of a delivery service system where custo
 - Docker (for containerization)
 - Kubernetes (for deployment)
 
-## Running the Application
+Use http://localhost:8080/swagger-ui/index.html to test the APIs
 
-### Using Maven
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/ayoubtary/drive-and-delivery.git
+## Running the Application Prerequisites
+
+- Docker
+- Docker Compose
+
+## Getting Started
+
+### 1. Clone the Repository
+
+Clone this repository to your local machine:
+
+```sh
+git clone https://github.com/yourusername/drive-and-deliver.git
+cd drive-and-deliver 
+
+
+./mvnw clean package
+
+
+docker-compose build
+docker-compose up 
+
+
