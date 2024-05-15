@@ -23,11 +23,23 @@ public class DeliveryServiceImp  implements DeliveryService{
 
     @Override
     public DeliverySlot bookSlot(Long slotId) {
-        return null;
+
+        DeliverySlot slot = deliverySlotRepository.findById(slotId)
+                .orElseThrow(() -> new RuntimeException("Slot not found"));
+        if (slot.isBooked()) {
+            throw new RuntimeException("Slot already booked");
+        }
+        slot.setBooked(true);
+        return deliverySlotRepository.save(slot);
     }
 
     @Override
     public DeliverySlot createSlot(DeliveryMethod deliveryMethod, LocalDateTime startTime, LocalDateTime endTime) {
-        return null;
+        DeliverySlot slot = new DeliverySlot();
+        slot.setDeliveryMethod(deliveryMethod);
+        slot.setStartTime(startTime);
+        slot.setEndTime(endTime);
+        slot.setBooked(false);
+        return deliverySlotRepository.save(slot);
     }
 }
