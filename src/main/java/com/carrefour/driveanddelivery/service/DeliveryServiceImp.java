@@ -18,7 +18,8 @@ public class DeliveryServiceImp  implements DeliveryService{
     }
     @Override
     public List<DeliverySlot> getAvailableSlots(DeliveryMethod deliveryMethod) {
-        return null;
+
+        return deliverySlotRepository.findByDeliveryMethodAndBookedFalse(deliveryMethod);
     }
 
     @Override

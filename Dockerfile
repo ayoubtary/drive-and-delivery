@@ -5,7 +5,7 @@ FROM openjdk:21-jdk
 WORKDIR /app
 
 # Copy the build artifact from the target directory to the working directory
-COPY target/drive-and-deliver-0.0.1-SNAPSHOT.jar app.jar
+COPY target/DriveAndDelivery-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port that the application will run on
 EXPOSE 8080

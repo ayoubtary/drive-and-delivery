@@ -19,26 +19,22 @@ This project is a simple implementation of a delivery service system where custo
 
 Use http://localhost:8080/swagger-ui/index.html to test the APIs
 
-## Running the Application Prerequisites
-
+## Running the Application 
+### Prerequisites 
+- Java 21
+- Maven 3.9.x
 - Docker
 - Docker Compose
+- Kubernetes
 
-## Getting Started
+### Steps to run the app: 
 
-### 1. Clone the Repository
-
-Clone this repository to your local machine:
-
-```sh
-git clone https://github.com/yourusername/drive-and-deliver.git
-cd drive-and-deliver 
-
-
-./mvnw clean package
-
-
-docker-compose build
-docker-compose up 
-
-
+1. git clone https://github.com/yourusername/drive-and-deliver.git
+2. cd drive-and-deliver
+3. run "docker-compose up -d  postgres" 
+4. run "./mvnw clean package"
+5. run "docker-compose up -d  app"  
+6. run "kubectl apply -f postgres-pv-pvc.yaml"
+7. run "kubectl apply -f postgres-deployment.yaml"
+8. run "kubectl apply -f app-deployment.yaml"
+9. launch http://localhost:8080/swagger-ui/index.html 

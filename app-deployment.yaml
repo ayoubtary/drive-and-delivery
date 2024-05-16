@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drive-and-deliver-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drive-and-deliver-app
+  template:
+    metadata:
+      labels:
+        app: drive-and-deliver-app
+    spec:
+      containers:
+        - name: drive-and-deliver-app
+          image: drive-and-deliver-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/driveanddeliverdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "pwd"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+      initContainers:
+        - name: init-postgres
+          image: busybox
+          command: ['sh', '-c', 'until nslookup postgres; do echo waiting for postgres; sleep 2; done']
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drive-and-deliver-app
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: drive-and-deliver-app
