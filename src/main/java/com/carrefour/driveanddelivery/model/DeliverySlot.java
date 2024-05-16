@@ -9,7 +9,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter @ToString @EqualsAndHashCode @AllArgsConstructor @NoArgsConstructor
+@Data
 public class DeliverySlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

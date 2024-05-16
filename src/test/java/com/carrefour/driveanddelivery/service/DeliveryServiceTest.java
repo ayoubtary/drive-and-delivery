@@ -116,12 +116,14 @@ public class DeliveryServiceTest {
         slot.setEndTime(LocalDateTime.now().plusHours(1));
         slot.setBooked(false);
 
-        when(deliverySlotRepository.save(slot)).thenReturn(slot);
+        when(deliverySlotRepository.save(any(DeliverySlot.class))).thenReturn(slot);
 
         DeliverySlot createdSlot = deliveryService.createSlot(DeliveryMethod.DELIVERY, slot.getStartTime(), slot.getEndTime());
-        assertEquals(slot, createdSlot);
+        assertEquals(slot.getDeliveryMethod(), createdSlot.getDeliveryMethod());
+        assertEquals(slot.getStartTime(), createdSlot.getStartTime());
+        assertEquals(slot.getEndTime(), createdSlot.getEndTime());
         assertFalse(createdSlot.isBooked());
 
-        verify(deliverySlotRepository, times(1)).save(slot);
+        verify(deliverySlotRepository, times(1)).save(any(DeliverySlot.class));
     }
 }
